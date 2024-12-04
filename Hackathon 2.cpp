@@ -47,7 +47,7 @@ int main(){
 				
 			case 3:
 			    tich=1;
-				printf("Cac phan tu duong bien la:");
+				printf("Cac phan tu tren duong bien la:");
 				for(int i=0;i<rows;i++){
 					printf("\n");
 					for(int j=0;j<cols;j++){
@@ -72,6 +72,7 @@ int main(){
 					printf("Khong co duong cheo chinh");
 				    continue;	
 				}
+				printf("Cac phan tu tren duong cheo chinh la");
 				for(int i=0;i<rows;i++){
 					printf("\n");
 					for(int j=0;j<cols;j++){
@@ -93,11 +94,12 @@ int main(){
 					printf("Khong co duong cheo phu");
 					continue;
 				}
+				printf("Cac phan tu tren duong cheo phu la");
 				for(int i=0; i<rows; i++){
 					printf("\n");
 					for(int j=0;j<cols;j++){
 						if(j==cols-i-1){
-							printf("%d",arr[i][j]);
+							printf("%3d",arr[i][j]);
 						}else{
 							printf("   ");
 						}
@@ -143,7 +145,7 @@ int main(){
 						}
 					}
 				}
-				if(found=0){
+				if(found==0){
 					printf("Khong tim thay phan tu %d trong mang.\n", x);
 				}else{
 					printf("\n");

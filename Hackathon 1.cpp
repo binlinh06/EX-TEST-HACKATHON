@@ -1,10 +1,10 @@
 #include <stdio.h>
-#include <math.h>
 int main() {
     int MAX;    
     int arr[100];
     int n = 0;
-    int luaChon,value,position,size,i,x,start,end,mid;
+    int luaChon,value,position,size,i,x;
+    int found=0;
     do {
         printf("\n---------------MENU---------------\n");
         printf("1. Nhap so phan tu can nhap va gia tri cac phan tu\n");
@@ -29,6 +29,7 @@ int main() {
                 }
                 break;
 
+
             case 2: 
                 if (n == 0) {
                     printf("Mang chua co phan tu nao!\n");
@@ -47,55 +48,73 @@ int main() {
                 } else {
                     int lonNhat = arr[0];
                     for (int i = 1; i < n; i++) {
-                        if (arr[i] > lonNhat) lonNhat = arr[i];
+                        if (arr[i] > lonNhat){
+                        	lonNhat = arr[i];
+						}
                     }
                     printf("Gia tri lon nhat: %d\n", lonNhat);
                 }
                 break;
             
-            case 4: 
-                int kiemTraSoNguyenTo; 
-                if (n < 2){
-    	            return 0;
-	            }
-                for (int i = 2; i <= sqrt(n); i++) {
-                    if (n % i == 0){
-                    return 0;
-	                }
-                }
-                printf("Cac phan tu la so nguyen to: ");
-                for (int i = 0; i < n; i++) {
-                        printf("%d ", arr[i]);
-                }
-                break;
+            case 4:{
+            	if(n <= 0){
+					printf("Mang chua duoc tao \n");
+					break;
+				}else{
+					printf("Cac phan tu la so nguyen to trong mang la : ");
+					for(int i = 0 ; i < n ; i++){
+						int number = arr[i];
+						int isPrime = 1;
+						if(number < 2){
+							isPrime = 0;
+						}else{
+							for(int i = 2 ; i*i <= number ; i++){
+								if(number % i == 0){
+									isPrime = 0;
+									break;
+								}
+							}
+						}
+						if(isPrime){
+							printf("%d \t",number);
+							found = 1;
+						}
+					}
+					if(!found){
+						printf("Khong co so nguyen trong mang \n");
+					}
+				}
+				break;
+			}
+                
             
             case 5: 
             	printf("Vui long nhap phan tu muon them: ");
 	            scanf("%d",&value);
         	    printf("Vui long nhap vi tri muon them: ");
         	    scanf("%d",&position);
-        	    if (position < 1 || position > size + 1) {
+        	    if (position < 1 || position > n + 1) {
                     printf("Vi tri khong hop le.\n");
-                    return 1;
+                    break;
                 }
-        	    for(int i=size;i>=position;i--){
+        	    for(int i=n;i>=position;i--){
       	            arr[i]=arr[i-1];
         	    }
         	    arr[position-1]=value;
-        	    size++;    
+        	    n++;    
          	    break;
             
             case 6: 
                 printf("Vui long nhap vi tri muon xoa: ");
 	            scanf("%d",&position);
-	            if (position < 1 || position > size + 1) {
+	            if (position < 1 || position > n + 1) {
                     printf("Vi tri khong hop le.\n");
-                    return 1;
+                    break;
                 }
-	            for(int i=position-1;i<size;i++){
+	            for(int i=position-1;i<n;i++){
 		            arr[i]=arr[i+1];
 	            }
-	            size--;
+	            n--;
 	            break;
             
             case 7: 
@@ -112,18 +131,17 @@ int main() {
             case 8:
             	printf("Vui long nhap 1 so bat ki de tim vi tri:");
                 scanf("%d",&x);
-                while(start<=end){
-    	            mid=(start+end)/2;
-    	            if(arr[mid]==x){
-    		            printf("Vi tri phan tu can tim o vi tri %d\n",mid);
-    		            return 0;
-		            }else if(arr[mid]>x){
-			            end=mid -1;
-		            }else{
-			            start=mid+1;
-		            }
-	            }
-	            printf("Ko tim thay phan tu\n");
+                for(int i=0;i<n;i++){
+                	if(arr[i]==x){
+                		printf("Vi tri phan tu can tim o vi tri %d\n",i+1);
+                		found=1;
+					}
+				}
+				if(found==0){
+					printf("Khong tim thay phan tu %d trong mang.\n", x);
+				}else{
+					printf("\n");
+				}
 	            break;
             case 9: {
                 printf("Thoat chuong trinh.\n");
